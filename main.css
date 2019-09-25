@@ -1,0 +1,21 @@
+body {
+    background-color: lightblue;
+}
+
+#moisture {
+    text-align: center;
+    font-size: 20px;
+    font-family: Helvetica, Arial, sans-serif
+}
+
+#moisture_level {
+    text-align: center;
+    font-size: 20px;
+    font-family: Helvetica, Arial, sans-serif
+}
+
+#tripped {
+    text-align: center;
+    font-size: 40px;
+    font-family: Helvetica, Arial, sans-serif
+}

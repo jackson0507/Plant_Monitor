@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>  
+
+<body>
+    <p id="moisture">waiting for data...</p><br>
+    <p id="moisture_level"></p><br>
+ 
+    <script type="text/javascript">
+
+      var alertSent = "yes";
+      window.setInterval(function() {
+
+        var deviceID = "2a0022001047363336383437";
+        var accessToken = "2d6464e638db8cf24933f404bf603acb93cc81fe";
+        var varName = "moisture";
+
+        requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + varName + "/?access_token=" + accessToken;
+        $.getJSON(requestURL, function(json) {
+                 document.getElementById("moisture").innerHTML = "Moisture Number: " + json.result;
+                 if (json.result > 4000) {
+                  document.getElementById("moisture_level").innerHTML = "Moisture Level: Great";
+                  alertSent = "no";
+                 } else if (json.result > 3000) {
+                  document.getElementById("moisture_level").innerHTML = "Moisture Level: Good";
+                 } else if (json.result > 2000) {
+                  document.getElementById("moisture_level").innerHTML = "Moisture Level: Okay";
+                 } else {
+                  document.getElementById("moisture_level").innerHTML = "Moisture Level: Bad, Water Plant!";
+                  if (alertSent === "no") {
+                    alert("Water Plant!");
+                  }
+                 }
+                 });
+    }, 1000);
+    </script>
+</body>
+</html>
